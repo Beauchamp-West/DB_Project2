@@ -1,11 +1,16 @@
 package com.springdemo.db_project2.service.impl;
 
+import com.springdemo.db_project2.entity.Enterprise;
 import com.springdemo.db_project2.entity.Model;
 import com.springdemo.db_project2.dao.ModelDao;
 import com.springdemo.db_project2.service.ModelService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,20 +31,8 @@ public class ModelServiceImpl implements ModelService {
      * @return 实例对象
      */
     @Override
-    public Model queryById(Integer id) {
-        return this.modelDao.queryById(id);
-    }
-
-    /**
-     * 查询多条数据
-     *
-     * @param offset 查询起始位置
-     * @param limit 查询条数
-     * @return 对象列表
-     */
-    @Override
-    public List<Model> queryAllByLimit(int offset, int limit) {
-        return this.modelDao.queryAllByLimit(offset, limit);
+    public Model selectById(Integer id) {
+        return this.modelDao.selectById(id);
     }
 
     /**
@@ -63,7 +56,7 @@ public class ModelServiceImpl implements ModelService {
     @Override
     public Model update(Model model) {
         this.modelDao.update(model);
-        return this.queryById(model.getId());
+        return this.selectById(model.getId());
     }
 
     /**
@@ -75,5 +68,33 @@ public class ModelServiceImpl implements ModelService {
     @Override
     public boolean deleteById(Integer id) {
         return this.modelDao.deleteById(id) > 0;
+    }
+
+    @Override
+    public String importModels() {
+        List<Model> modelList = new ArrayList<>();
+        int cnt = 0;
+        String fileName = "tables/model.csv";
+
+        try (BufferedReader infile = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            String[] data;
+            infile.readLine();
+            while ((line = infile.readLine()) != null) {
+                data = line.split(",");
+                Model model = new Model();
+                model.setNumber(data[1]);
+                model.setModel(data[2]);
+                model.setName(data[3]);
+                model.setUnitPrice(Integer.getInteger(data[4]));
+                modelList.add(model);
+                cnt++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        this.modelDao.batchInsert(modelList);
+        return "Successfully imported " + cnt + " models!\n";
     }
 }

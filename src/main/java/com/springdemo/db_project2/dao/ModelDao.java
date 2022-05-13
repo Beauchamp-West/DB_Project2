@@ -1,6 +1,10 @@
 package com.springdemo.db_project2.dao;
 
 import com.springdemo.db_project2.entity.Model;
+import com.springdemo.db_project2.provider.ModelProvider;
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
@@ -10,6 +14,7 @@ import java.util.List;
  * @author makejava
  * @since 2022-05-13 02:47:40
  */
+@Mapper
 public interface ModelDao {
 
     /**
@@ -18,16 +23,7 @@ public interface ModelDao {
      * @param id 主键
      * @return 实例对象
      */
-    Model queryById(Integer id);
-
-    /**
-     * 查询指定行数据
-     *
-     * @param offset 查询起始位置
-     * @param limit 查询条数
-     * @return 对象列表
-     */
-    List<Model> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    Model selectById(Integer id);
 
 
     /**
@@ -36,7 +32,7 @@ public interface ModelDao {
      * @param model 实例对象
      * @return 对象列表
      */
-    List<Model> queryAll(Model model);
+    List<Model> selectAll(Model model);
 
     /**
      * 新增数据
@@ -62,4 +58,12 @@ public interface ModelDao {
      */
     int deleteById(Integer id);
 
+    /**
+     * 批量新增数据
+     *
+     * @param models 新增数据列表
+     */
+    @InsertProvider(type = ModelProvider.class, method = "importModels")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    void batchInsert(@Param("list") List<Model> models);
 }

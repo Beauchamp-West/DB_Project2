@@ -2,6 +2,7 @@ package com.springdemo.db_project2.controller;
 
 import com.springdemo.db_project2.entity.Staff;
 import com.springdemo.db_project2.service.StaffService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -27,9 +28,17 @@ public class StaffController {
      * @param id 主键
      * @return 单条数据
      */
-    @GetMapping("selectOne")
-    public Staff selectOne(Integer id) {
+    @GetMapping("select/{id}")
+    public Staff select(@Param("id") Integer id) {
         return this.staffService.queryById(id);
     }
+
+    /**
+     * 导入原始数据
+     *
+     * @return 导入信息
+     */
+    @GetMapping("import")
+    public String importStaff() {return staffService.importStaffs(); }
 
 }

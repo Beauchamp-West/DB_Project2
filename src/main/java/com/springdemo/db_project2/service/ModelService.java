@@ -17,16 +17,7 @@ public interface ModelService {
      * @param id 主键
      * @return 实例对象
      */
-    Model queryById(Integer id);
-
-    /**
-     * 查询多条数据
-     *
-     * @param offset 查询起始位置
-     * @param limit 查询条数
-     * @return 对象列表
-     */
-    List<Model> queryAllByLimit(int offset, int limit);
+    Model selectById(Integer id);
 
     /**
      * 新增数据
@@ -52,4 +43,10 @@ public interface ModelService {
      */
     boolean deleteById(Integer id);
 
+    /**
+     * 导入原始数据
+     *
+     * @return 导入信息
+     */
+    String importModels();
 }

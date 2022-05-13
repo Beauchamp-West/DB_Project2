@@ -31,8 +31,13 @@ public interface SupplyCenterDao {
     @Delete("delete from supply_center where id=#{id}")
     int deleteById(Integer id);
 
+    /**
+     * 批量新增数据
+     *
+     * @param supplyCenters 新增数据列表
+     */
     @InsertProvider(type = SupplyCenterProvider.class, method = "importCenters")
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    int batchInsert(@Param("list") List<SupplyCenter> supplyCenters);
+    void batchInsert(@Param("list") List<SupplyCenter> supplyCenters);
 
 }

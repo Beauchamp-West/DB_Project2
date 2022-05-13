@@ -6,6 +6,9 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Enterprise(复杂数据库操作方法提供层)
+ */
 public class EnterpriseProvider {
     public String importEnterprises(Map map) {
         List<Enterprise> enterpriseList = (List<Enterprise>) map.get("list");

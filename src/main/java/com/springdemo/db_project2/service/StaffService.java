@@ -52,4 +52,11 @@ public interface StaffService {
      */
     boolean deleteById(Integer id);
 
+    /**
+     * 导入原始数据
+     *
+     * @return 导入信息
+     */
+    String importStaffs();
+
 }

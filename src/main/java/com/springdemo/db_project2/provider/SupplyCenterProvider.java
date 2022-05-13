@@ -6,6 +6,9 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * SupplyCenter(复杂数据库操作方法提供层)
+ */
 public class SupplyCenterProvider {
     public String importCenters(Map map) {
         List<SupplyCenter> supplyCenterList = (List<SupplyCenter>) map.get("list");

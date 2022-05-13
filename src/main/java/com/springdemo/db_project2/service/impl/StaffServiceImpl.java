@@ -6,6 +6,10 @@ import com.springdemo.db_project2.service.StaffService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -75,5 +79,36 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public boolean deleteById(Integer id) {
         return this.staffDao.deleteById(id) > 0;
+    }
+
+    @Override
+    public String importStaffs() {
+        List<Staff> staffList = new ArrayList<>();
+        int cnt = 0;
+        String fileName = "tables/staff.csv";
+
+        try (BufferedReader infile = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            String[] data;
+            infile.readLine();
+            while ((line = infile.readLine()) != null) {
+                data = line.split(",");
+                Staff staff = new Staff();
+                staff.setName(data[1]);
+                staff.setAge(Integer.getInteger(data[2]));
+                staff.setGender(data[3]);
+                staff.setNumber(Integer.getInteger(data[4]));
+                staff.setSupplyCenter(data[5]);
+                staff.setMobileNumber(data[6]);
+                staff.setType(data[7]);
+                staffList.add(staff);
+                cnt++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        staffDao.batchInsert(staffList);
+        return "Successfully imported " + cnt + " staffs!\n";
     }
 }

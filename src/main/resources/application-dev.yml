@@ -23,7 +23,6 @@ spring:
 
 
 mybatis:
-#  mapper-locations: classpath:mapper/*Dao.xml
   type-aliases-package: com.springdemo.db_project2.entity
   configuration:
     map-underscore-to-camel-case: true

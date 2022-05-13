@@ -1,6 +1,7 @@
 package com.springdemo.db_project2.dao;
 
 import com.springdemo.db_project2.entity.Inventory;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.List;
  * @author makejava
  * @since 2022-05-13 02:46:41
  */
+@Mapper
 public interface InventoryDao {
 
     /**

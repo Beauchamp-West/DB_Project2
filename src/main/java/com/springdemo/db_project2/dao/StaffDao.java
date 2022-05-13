@@ -1,6 +1,12 @@
 package com.springdemo.db_project2.dao;
 
+import com.springdemo.db_project2.entity.Model;
 import com.springdemo.db_project2.entity.Staff;
+import com.springdemo.db_project2.provider.ModelProvider;
+import com.springdemo.db_project2.provider.StaffProvider;
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
@@ -10,6 +16,7 @@ import java.util.List;
  * @author makejava
  * @since 2022-05-13 02:50:08
  */
+@Mapper
 public interface StaffDao {
 
     /**
@@ -62,4 +69,12 @@ public interface StaffDao {
      */
     int deleteById(Integer id);
 
+    /**
+     * 批量新增数据
+     *
+     * @param staffs 新增数据列表
+     */
+    @InsertProvider(type = StaffProvider.class, method = "importStaffs")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    void batchInsert(@Param("list") List<Staff> staffs);
 }

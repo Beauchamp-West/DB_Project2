@@ -1,5 +1,9 @@
 package com.springdemo.db_project2.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 /**
@@ -8,8 +12,10 @@ import java.io.Serializable;
  * @author makejava
  * @since 2022-05-13 02:50:08
  */
-public class Staff implements Serializable {
-    private static final long serialVersionUID = -35743357191694224L;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Staff {
     
     private Integer id;
     
@@ -26,70 +32,5 @@ public class Staff implements Serializable {
     private String mobileNumber;
     
     private String type;
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public Integer getNumber() {
-        return number;
-    }
-
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
-
-    public String getSupplyCenter() {
-        return supplyCenter;
-    }
-
-    public void setSupplyCenter(String supplyCenter) {
-        this.supplyCenter = supplyCenter;
-    }
-
-    public String getMobileNumber() {
-        return mobileNumber;
-    }
-
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
 }
