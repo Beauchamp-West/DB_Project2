@@ -3,7 +3,6 @@ package com.springdemo.db_project2.service.impl;
 import com.springdemo.db_project2.entity.SupplyCenter;
 import com.springdemo.db_project2.dao.SupplyCenterDao;
 import com.springdemo.db_project2.service.SupplyCenterService;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -30,21 +29,17 @@ public class SupplyCenterServiceImpl implements SupplyCenterService {
     }
 
     @Override
-    public String selectAll() {
+    public List<SupplyCenter> selectAll() {
         List<SupplyCenter> supplyCenters = this.supplyCenterDao.selectAll();
-        StringBuilder sb = new StringBuilder();
-        for (SupplyCenter supplyCenter : supplyCenters) {
-            sb.append(supplyCenter.toString()).append("\n");
-        }
-        return sb.toString();
+        return supplyCenters;
     }
 
     @Override
-    public SupplyCenter insert(String name) {
+    public String insert(String name) {
         SupplyCenter supplyCenter = new SupplyCenter();
         supplyCenter.setName(name);
         this.supplyCenterDao.insert(supplyCenter);
-        return supplyCenter;
+        return "Successfully inserted one supply center!\n";
     }
 
     @Override
@@ -54,8 +49,9 @@ public class SupplyCenterServiceImpl implements SupplyCenterService {
     }
 
     @Override
-    public boolean deleteById(Integer id) {
-        return this.supplyCenterDao.deleteById(id) > 0;
+    public String deleteById(Integer id) {
+        this.supplyCenterDao.deleteById(id);
+        return "Successfully deleted supply center " + id + "!\n";
     }
 
     @Override
@@ -69,9 +65,9 @@ public class SupplyCenterServiceImpl implements SupplyCenterService {
             String[] data;
             infile.readLine();
             while ((line = infile.readLine()) != null) {
-                data = line.split(",");
+                data = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                 SupplyCenter supplyCenter = new SupplyCenter();
-                supplyCenter.setName(data[1]);
+                supplyCenter.setName(data[1].replace("\"",""));
                 supplyCenters.add(supplyCenter);
                 cnt++;
             }

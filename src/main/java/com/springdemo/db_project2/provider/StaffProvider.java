@@ -17,12 +17,12 @@ public class StaffProvider {
         sb.append("(name,age,gender,number,supply_center,mobile_number,type) values ");
         MessageFormat mf = new MessageFormat(
                 "("
-                        + "#'{'list[{0}].name}"
-                        + "#'{'list[{0}].age}"
-                        + "#'{'list[{0}].gender}"
-                        + "#'{'list[{0}].number}"
-                        + "#'{'list[{0}].supplyCenter}"
-                        + "#'{'list[{0}].mobileNumber}"
+                        + "#'{'list[{0}].name},"
+                        + "#'{'list[{0}].age},"
+                        + "#'{'list[{0}].gender},"
+                        + "#'{'list[{0}].number},"
+                        + "#'{'list[{0}].supplyCenter},"
+                        + "#'{'list[{0}].mobileNumber},"
                         + "#'{'list[{0}].type}"
                         + ")"
         );

@@ -90,12 +90,12 @@ public class EnterpriseServiceImpl implements EnterpriseService {
             String[] data;
             infile.readLine();
             while ((line = infile.readLine()) != null) {
-                data = line.split(",");
+                data = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                 Enterprise enterprise = new Enterprise();
                 enterprise.setName(data[1]);
                 enterprise.setCountry(data[2]);
                 enterprise.setCity(data[3]);
-                enterprise.setSupplyCenter(data[4]);
+                enterprise.setSupplyCenter(data[4].replace("\"",""));
                 enterprise.setIndustry(data[5]);
                 enterprises.add(enterprise);
                 cnt++;

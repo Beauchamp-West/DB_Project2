@@ -2,6 +2,8 @@ package com.springdemo.db_project2.service;
 
 import com.springdemo.db_project2.entity.SupplyCenter;
 
+import java.util.List;
+
 /**
  * (SupplyCenter)表服务接口
  *
@@ -23,15 +25,15 @@ public interface SupplyCenterService {
      *
      * @return 对象列表
      */
-    String selectAll();
+    List<SupplyCenter> selectAll();
 
     /**
      * 新增数据
      *
      * @param name 插入名字
-     * @return 实例对象
+     * @return 插入信息
      */
-    SupplyCenter insert(String name);
+    String insert(String name);
 
     /**
      * 修改数据
@@ -48,7 +50,7 @@ public interface SupplyCenterService {
      * @param id 主键
      * @return 是否成功
      */
-    boolean deleteById(Integer id);
+    String deleteById(Integer id);
 
     /**
      * 导入原始数据

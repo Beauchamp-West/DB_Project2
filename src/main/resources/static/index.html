@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"><!--这个是thymeleaf命名空间-->
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <style>
+        .button {
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+        .button1 {
+            background-color: white;
+            color: black;
+            border: 2px solid #4CAF50;
+        }
+        .button1:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .button2 {
+            background-color: white;
+            color: black;
+            border: 2px solid #008CBA;
+        }
+        .button2:hover {
+            background-color: #008CBA;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<h1 style="font-family: verdana,sans-serif;text-align: center">Welcome to Stock Management System!</h1>
+<p style="color:grey;text-align: center;font-size: large">You can click the following buttons to manipulate the database.</p>
+<br>
+<input type="button" onclick="location.href='/all/import'" value="Import Original Data" class="button button1">
+<input type="button" onclick="location.href='/center/selectAll'" value="Supply Center List" class="button button2">
+<input type="button" onclick="location.href='/center/select'" value="Select Supply Center" class="button button1">
+<input type="button" onclick="location.href='/center/update'" value="Update Supply Center" class="button button2">
+<input type="button" onclick="location.href='/center/add'" value="Add Supply Center" class="button button1">
+<input type="button" onclick="location.href='/center/delete'" value="Delete Supply Center" class="button button2">
+</body>
+</html>

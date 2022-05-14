@@ -92,13 +92,13 @@ public class StaffServiceImpl implements StaffService {
             String[] data;
             infile.readLine();
             while ((line = infile.readLine()) != null) {
-                data = line.split(",");
+                data = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                 Staff staff = new Staff();
                 staff.setName(data[1]);
                 staff.setAge(Integer.getInteger(data[2]));
                 staff.setGender(data[3]);
                 staff.setNumber(Integer.getInteger(data[4]));
-                staff.setSupplyCenter(data[5]);
+                staff.setSupplyCenter(data[5].replace("\"",""));
                 staff.setMobileNumber(data[6]);
                 staff.setType(data[7]);
                 staffList.add(staff);

@@ -17,9 +17,9 @@ public class ModelProvider {
         sb.append("(number,model,name,unit_price) values ");
         MessageFormat mf = new MessageFormat(
                 "("
-                        + "#'{'list[{0}].number}"
-                        + "#'{'list[{0}].model}"
-                        + "#'{'list[{0}].name}"
+                        + "#'{'list[{0}].number},"
+                        + "#'{'list[{0}].model},"
+                        + "#'{'list[{0}].name},"
                         + "#'{'list[{0}].unitPrice}"
                         + ")"
         );

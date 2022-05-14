@@ -17,10 +17,10 @@ public class EnterpriseProvider {
         sb.append("(name,country,city,supply_center,industry) values ");
         MessageFormat mf = new MessageFormat(
                 "("
-                        + "#'{'list[{0}].name}"
-                        + "#'{'list[{0}].country}"
-                        + "#'{'list[{0}].city}"
-                        + "#'{'list[{0}].supplyCenter}"
+                        + "#'{'list[{0}].name},"
+                        + "#'{'list[{0}].country},"
+                        + "#'{'list[{0}].city},"
+                        + "#'{'list[{0}].supplyCenter},"
                         + "#'{'list[{0}].industry}"
                         + ")"
         );
