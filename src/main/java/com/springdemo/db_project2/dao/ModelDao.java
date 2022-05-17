@@ -2,10 +2,8 @@ package com.springdemo.db_project2.dao;
 
 import com.springdemo.db_project2.entity.Model;
 import com.springdemo.db_project2.provider.ModelProvider;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
 
 /**
@@ -24,6 +22,15 @@ public interface ModelDao {
      * @return 实例对象
      */
     Model selectById(Integer id);
+
+    /**
+     * 通过model查询
+     *
+     * @param m model名
+     * @return 对象列表
+     */
+    @Select("select * from model where model = #{m}")
+    List<Model> queryByModel(String m);
 
 
     /**

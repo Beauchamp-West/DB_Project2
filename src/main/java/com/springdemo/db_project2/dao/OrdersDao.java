@@ -3,6 +3,8 @@ package com.springdemo.db_project2.dao;
 import com.springdemo.db_project2.entity.Orders;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
 import java.util.List;
 
 /**
@@ -33,12 +35,11 @@ public interface OrdersDao {
 
 
     /**
-     * 通过实体作为筛选条件查询
+     * query all orders
      *
-     * @param orders 实例对象
-     * @return 对象列表
      */
-    List<Orders> queryAll(Orders orders);
+    @Select("select * from orders")
+    List<Orders> queryAll();
 
     /**
      * 新增数据

@@ -1,10 +1,13 @@
 package com.springdemo.db_project2.controller;
 
 import com.springdemo.db_project2.entity.Contract;
+import com.springdemo.db_project2.entity.Inventory;
 import com.springdemo.db_project2.service.ContractService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (Contract)表控制层
@@ -32,4 +35,12 @@ public class ContractController {
         return this.contractService.queryById(id);
     }
 
+    @GetMapping("selectAll")
+    public ModelAndView selectAll() {
+        List<Contract> res = contractService.queryAll();
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("contracts",res);
+        mav.setViewName("select_contract");
+        return mav;
+    }
 }

@@ -38,13 +38,23 @@
 </head>
 <body>
 <h1 style="font-family: verdana,sans-serif;text-align: center">Welcome to Stock Management System!</h1>
-<p style="color:grey;text-align: center;font-size: large">You can click the following buttons to manipulate the database.</p>
+<p style="color:grey;text-align: center;font-size: large">Click the following buttons to manipulate the database.</p>
+<p style="font-family: Verdana,sans-serif;">One-click Import:</p>
+<input type="button" onclick="location.href='/all/import'" value="Import Original & Test Data" class="button button2">
 <br>
-<input type="button" onclick="location.href='/all/import'" value="Import Original Data" class="button button1">
+<p style="font-family: Verdana,sans-serif;">4 Basic Operations for Supply Center:</p>
+<input type="button" onclick="location.href='select_by_id.html'" value="Select Supply Center" class="button button1">
+<input type="button" onclick="location.href='update_name.html'" value="Update Supply Center" class="button button2">
+<input type="button" onclick="location.href='add_name.html'" value="Add Supply Center" class="button button1">
+<input type="button" onclick="location.href='delete_id.html'" value="Delete Supply Center" class="button button2">
+<br>
+<p style="font-family: Verdana,sans-serif;">Tables' Lists:</p>
 <input type="button" onclick="location.href='/center/selectAll'" value="Supply Center List" class="button button2">
-<input type="button" onclick="location.href='/center/select'" value="Select Supply Center" class="button button1">
-<input type="button" onclick="location.href='/center/update'" value="Update Supply Center" class="button button2">
-<input type="button" onclick="location.href='/center/add'" value="Add Supply Center" class="button button1">
-<input type="button" onclick="location.href='/center/delete'" value="Delete Supply Center" class="button button2">
+<input type="button" onclick="location.href='/inventory/selectAll'" value="Inventory List" class="button button1">
+<input type="button" onclick="location.href='/orders/selectAll'" value="Order List" class="button button2">
+<input type="button" onclick="location.href='/contract/selectAll'" value="Contract List" class="button button1">
+<br>
+<p style="font-family: Verdana,sans-serif;">Stock & Order Manipulations:</p>
+<input type="button" onclick="location.href='add_inventory.html'" value="Stock in" class="button button2">
 </body>
 </html>

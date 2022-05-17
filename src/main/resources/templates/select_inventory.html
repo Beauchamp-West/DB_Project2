@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>PrintImportInfo</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td>id</td>
+        <td>supply_center</td>
+        <td>product_model</td>
+        <td>supply_staff</td>
+        <td>date</td>
+        <td>purchase_price</td>
+        <td>quantity</td>
+    </tr>
+    <tr th:each="c : ${inventories}">
+        <td th:text="${c.id}"></td>
+        <td th:text="${c.supplyCenter}"></td>
+        <td th:text="${c.productModel}"></td>
+        <td th:text="${c.supplyStaff}"></td>
+        <td th:text="${c.date}"></td>
+        <td th:text="${c.purchasePrice}"></td>
+        <td th:text="${c.quantity}"></td>
+    </tr>
+</table>
+</body>
+</html>

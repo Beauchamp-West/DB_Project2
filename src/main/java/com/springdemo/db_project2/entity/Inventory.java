@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -26,8 +27,7 @@ public class Inventory {
     
     private Integer supplyStaff;
 
-    @DateTimeFormat(pattern = "M/d/yyyy")
-    private Date date;
+    private LocalDate date;
     
     private Integer purchasePrice;
     

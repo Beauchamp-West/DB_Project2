@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -20,14 +21,11 @@ public class Contract {
     
     private Integer contractManager;
 
-    @DateTimeFormat(pattern = "M/d/yyyy")
-    private Date contractDate;
+    private LocalDate contractDate;
 
-    @DateTimeFormat(pattern = "M/d/yyyy")
-    private Date estimatedDeliveryDate;
+    private LocalDate estimatedDeliveryDate;
 
-    @DateTimeFormat(pattern = "M/d/yyyy")
-    private Date lodgementDate;
+    private LocalDate lodgementDate;
     
     private String contractType;
 

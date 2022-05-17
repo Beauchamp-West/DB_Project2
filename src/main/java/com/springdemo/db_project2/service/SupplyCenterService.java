@@ -21,6 +21,14 @@ public interface SupplyCenterService {
     SupplyCenter selectById(Integer id);
 
     /**
+     * 通过名字查所有符合数据
+     *
+     * @param name 名字
+     * @return 对象列表
+     */
+    List<SupplyCenter> selectByName(String name);
+
+    /**
      * 查询所有数据
      *
      * @return 对象列表

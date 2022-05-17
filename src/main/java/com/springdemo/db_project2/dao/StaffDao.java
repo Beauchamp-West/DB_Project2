@@ -4,10 +4,8 @@ import com.springdemo.db_project2.entity.Model;
 import com.springdemo.db_project2.entity.Staff;
 import com.springdemo.db_project2.provider.ModelProvider;
 import com.springdemo.db_project2.provider.StaffProvider;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
 
 /**
@@ -26,6 +24,15 @@ public interface StaffDao {
      * @return 实例对象
      */
     Staff queryById(Integer id);
+
+    /**
+     * 通过number查staff
+     *
+     * @param number 编号
+     * @return 对象列表
+     */
+    @Select("select * from staff where number = #{number}")
+    List<Staff> queryByNumber(Integer number);
 
     /**
      * 查询指定行数据

@@ -1,8 +1,8 @@
 package com.springdemo.db_project2.dao;
 
 import com.springdemo.db_project2.entity.Inventory;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
 
 /**
@@ -33,12 +33,12 @@ public interface InventoryDao {
 
 
     /**
-     * 通过实体作为筛选条件查询
+     * select all inventories
      *
-     * @param inventory 实例对象
      * @return 对象列表
      */
-    List<Inventory> queryAll(Inventory inventory);
+    @Select("select * from inventory")
+    List<Inventory> queryAll();
 
     /**
      * 新增数据
@@ -46,7 +46,11 @@ public interface InventoryDao {
      * @param inventory 实例对象
      * @return 影响行数
      */
-    int insert(Inventory inventory);
+    @Insert("insert into inventory (supply_center, product_model, supply_staff, date, purchase_price, quantity, sales)" +
+            " values(#{i.supplyCenter}, #{i.productModel}, #{i.supplyStaff}, #{i.date}, " +
+            "#{i.purchasePrice}, #{i.quantity}, #{i.sales})")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insert(@Param("i") Inventory inventory);
 
     /**
      * 修改数据

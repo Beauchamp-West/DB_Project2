@@ -18,6 +18,9 @@ public interface SupplyCenterDao {
     @Select("select * from supply_center where id = #{id}")
     SupplyCenter selectById(Integer id);
 
+    @Select("select * from supply_center where name = #{name}")
+    List<SupplyCenter> selectByName(String name);
+
     @Select("select * from supply_center")
     List<SupplyCenter> selectAll();
 

@@ -34,6 +34,11 @@ public class StaffServiceImpl implements StaffService {
         return this.staffDao.queryById(id);
     }
 
+    @Override
+    public List<Staff> queryByNumber(Integer number) {
+        return staffDao.queryByNumber(number);
+    }
+
     /**
      * 查询多条数据
      *
@@ -95,9 +100,9 @@ public class StaffServiceImpl implements StaffService {
                 data = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                 Staff staff = new Staff();
                 staff.setName(data[1]);
-                staff.setAge(Integer.getInteger(data[2]));
+                staff.setAge(Integer.parseInt(data[2]));
                 staff.setGender(data[3]);
-                staff.setNumber(Integer.getInteger(data[4]));
+                staff.setNumber(Integer.parseInt(data[4]));
                 staff.setSupplyCenter(data[5].replace("\"",""));
                 staff.setMobileNumber(data[6]);
                 staff.setType(data[7]);

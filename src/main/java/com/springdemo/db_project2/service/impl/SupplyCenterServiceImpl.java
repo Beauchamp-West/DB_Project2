@@ -29,9 +29,13 @@ public class SupplyCenterServiceImpl implements SupplyCenterService {
     }
 
     @Override
+    public List<SupplyCenter> selectByName(String name) {
+        return supplyCenterDao.selectByName(name);
+    }
+
+    @Override
     public List<SupplyCenter> selectAll() {
-        List<SupplyCenter> supplyCenters = this.supplyCenterDao.selectAll();
-        return supplyCenters;
+        return this.supplyCenterDao.selectAll();
     }
 
     @Override

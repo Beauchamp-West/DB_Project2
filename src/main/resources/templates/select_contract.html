@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>PrintImportInfo</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td>id</td>
+        <td>contract_num</td>
+        <td>enterprise</td>
+        <td>contract_manager</td>
+        <td>contract_date</td>
+        <td>estimated_delivery_date</td>
+        <td>lodgement_date</td>
+        <td>contract_type</td>
+    </tr>
+    <tr th:each="c : ${contracts}">
+        <td th:text="${c.id}"></td>
+        <td th:text="${c.contractNum}"></td>
+        <td th:text="${c.enterprise}"></td>
+        <td th:text="${c.contractManager}"></td>
+        <td th:text="${c.contractDate}"></td>
+        <td th:text="${c.estimatedDeliveryDate}"></td>
+        <td th:text="${c.lodgementDate}"></td>
+        <td th:text="${c.contractType}"></td>
+    </tr>
+</table>
+</body>
+</html>

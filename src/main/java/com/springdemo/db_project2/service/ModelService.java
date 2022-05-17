@@ -1,6 +1,8 @@
 package com.springdemo.db_project2.service;
 
 import com.springdemo.db_project2.entity.Model;
+import org.apache.ibatis.annotations.Select;
+
 import java.util.List;
 
 /**
@@ -18,6 +20,14 @@ public interface ModelService {
      * @return 实例对象
      */
     Model selectById(Integer id);
+
+    /**
+     * 通过model查询
+     *
+     * @param m model名
+     * @return 对象列表
+     */
+    List<Model> queryByModel(String m);
 
     /**
      * 新增数据

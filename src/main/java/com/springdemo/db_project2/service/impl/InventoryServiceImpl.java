@@ -33,13 +33,11 @@ public class InventoryServiceImpl implements InventoryService {
     /**
      * 查询多条数据
      *
-     * @param offset 查询起始位置
-     * @param limit 查询条数
      * @return 对象列表
      */
     @Override
-    public List<Inventory> queryAllByLimit(int offset, int limit) {
-        return this.inventoryDao.queryAllByLimit(offset, limit);
+    public List<Inventory> queryAll() {
+        return this.inventoryDao.queryAll();
     }
 
     /**
@@ -49,9 +47,9 @@ public class InventoryServiceImpl implements InventoryService {
      * @return 实例对象
      */
     @Override
-    public Inventory insert(Inventory inventory) {
+    public String insert(Inventory inventory) {
         this.inventoryDao.insert(inventory);
-        return inventory;
+        return "Successfully inserted " + inventory.toString() + "!\n";
     }
 
     /**

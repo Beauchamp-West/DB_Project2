@@ -35,6 +35,11 @@ public class ModelServiceImpl implements ModelService {
         return this.modelDao.selectById(id);
     }
 
+    @Override
+    public List<Model> queryByModel(String m) {
+        return modelDao.queryByModel(m);
+    }
+
     /**
      * 新增数据
      *
@@ -86,7 +91,7 @@ public class ModelServiceImpl implements ModelService {
                 model.setNumber(data[1]);
                 model.setModel(data[2]);
                 model.setName(data[3]);
-                model.setUnitPrice(Integer.getInteger(data[4]));
+                model.setUnitPrice(Integer.parseInt(data[4]));
                 modelList.add(model);
                 cnt++;
             }

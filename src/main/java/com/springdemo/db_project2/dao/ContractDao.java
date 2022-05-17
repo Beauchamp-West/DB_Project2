@@ -3,6 +3,8 @@ package com.springdemo.db_project2.dao;
 import com.springdemo.db_project2.entity.Contract;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
 import java.util.List;
 
 /**
@@ -33,12 +35,12 @@ public interface ContractDao {
 
 
     /**
-     * 通过实体作为筛选条件查询
+     * 查询全部合同
      *
-     * @param contract 实例对象
      * @return 对象列表
      */
-    List<Contract> queryAll(Contract contract);
+    @Select("select * from contract")
+    List<Contract> queryAll();
 
     /**
      * 新增数据

@@ -1,10 +1,13 @@
 package com.springdemo.db_project2.controller;
 
+import com.springdemo.db_project2.entity.Contract;
 import com.springdemo.db_project2.entity.Orders;
 import com.springdemo.db_project2.service.OrdersService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (Orders)表控制层
@@ -32,4 +35,12 @@ public class OrdersController {
         return this.ordersService.queryById(id);
     }
 
+    @GetMapping("selectAll")
+    public ModelAndView selectAll() {
+        List<Orders> res = ordersService.queryAll();
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("orders",res);
+        mav.setViewName("select_order");
+        return mav;
+    }
 }

@@ -24,20 +24,13 @@ public class SupplyCenterController {
     @Resource
     private SupplyCenterService supplyCenterService;
 
-    @GetMapping("select")
-    public ModelAndView select() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("select_by_id");
-        return mav;
-    }
-
     @GetMapping("selectByInput")
     public ModelAndView selectByInput(@RequestParam(name="id") Integer id) {
         List<SupplyCenter> res = new ArrayList<>();
         res.add(supplyCenterService.selectById(id));
         ModelAndView mav = new ModelAndView();
         mav.addObject("centers",res);
-        mav.setViewName("select_centers");
+        mav.setViewName("select_center");
         return mav;
     }
 
@@ -46,14 +39,7 @@ public class SupplyCenterController {
         List<SupplyCenter> res = supplyCenterService.selectAll();
         ModelAndView mav = new ModelAndView();
         mav.addObject("centers",res);
-        mav.setViewName("select_centers");
-        return mav;
-    }
-
-    @GetMapping("add")
-    public ModelAndView add() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("add_name");
+        mav.setViewName("select_center");
         return mav;
     }
 
@@ -62,24 +48,12 @@ public class SupplyCenterController {
         return this.supplyCenterService.insert(name);
     }
 
-    @GetMapping("delete")
-    public ModelAndView delete() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("delete_id");
-        return mav;
-    }
 
     @GetMapping("deleteById")
     public String deleteById(@RequestParam(name = "id") Integer id) {
         return supplyCenterService.deleteById(id);
     }
 
-    @GetMapping("update")
-    public ModelAndView update() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("update_name");
-        return mav;
-    }
 
     @GetMapping("updateName")
     public String updateName(@RequestParam(name = "name") String name, @RequestParam(name = "id") Integer id) {

@@ -20,6 +20,14 @@ public interface StaffService {
     Staff queryById(Integer id);
 
     /**
+     * 通过number查staff
+     *
+     * @param number 编号
+     * @return 对象列表
+     */
+    List<Staff> queryByNumber(Integer number);
+
+    /**
      * 查询多条数据
      *
      * @param offset 查询起始位置
