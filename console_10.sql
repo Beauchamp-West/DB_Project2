@@ -38,7 +38,7 @@ create table model
 create table contract
 (
     id   serial primary key,
-    contract_num            char(10), --合同的编号
+    contract_num            char(10) unique, --合同的编号
     enterprise              varchar(60),
     contract_manager        int,      --经理的number
     contract_date           date,

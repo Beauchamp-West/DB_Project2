@@ -1,7 +1,6 @@
 package com.springdemo.db_project2.controller;
 
 import com.springdemo.db_project2.entity.Contract;
-import com.springdemo.db_project2.entity.Inventory;
 import com.springdemo.db_project2.service.ContractService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,5 +41,11 @@ public class ContractController {
         mav.addObject("contracts",res);
         mav.setViewName("select_contract");
         return mav;
+    }
+
+    @GetMapping("selectCnt")
+    public String selectCnt() {
+        Long cnt = contractService.getContractCount();
+        return "total number of contracts: " + cnt;
     }
 }

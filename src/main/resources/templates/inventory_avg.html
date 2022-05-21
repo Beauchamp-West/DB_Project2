@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Average</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td>index</td>
+        <td>supply_center</td>
+        <td>average</td>
+    </tr>
+    <tr th:each="a,aStat : ${averages}">
+        <td th:text="${aStat.count}"></td>
+        <td th:text="${a['supply_center']}"></td>
+        <td th:text="${a['average']}"></td>
+    </tr>
+</table>
+</body>
+</html>

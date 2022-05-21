@@ -1,6 +1,5 @@
 package com.springdemo.db_project2.service.impl;
 
-import com.springdemo.db_project2.entity.Enterprise;
 import com.springdemo.db_project2.entity.Model;
 import com.springdemo.db_project2.dao.ModelDao;
 import com.springdemo.db_project2.service.ModelService;
@@ -36,8 +35,11 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
-    public List<Model> queryByModel(String m) {
-        return modelDao.queryByModel(m);
+    public List<Model> queryByModel(String m) { return modelDao.queryByModel(m); }
+
+    @Override
+    public List<Model> selectAll() {
+        return modelDao.selectAll();
     }
 
     /**

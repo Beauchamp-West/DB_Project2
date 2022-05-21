@@ -1,11 +1,14 @@
 package com.springdemo.db_project2.controller;
 
+import com.springdemo.db_project2.entity.Enterprise;
 import com.springdemo.db_project2.entity.Model;
 import com.springdemo.db_project2.service.ModelService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * (Model)表控制层
@@ -41,4 +44,12 @@ public class ModelController {
     @GetMapping("import")
     public String importModel() {return modelService.importModels(); }
 
+    @GetMapping("selectAll")
+    public ModelAndView selectAll() {
+        List<Model> res = modelService.selectAll();
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("models",res);
+        mav.setViewName("select_model");
+        return mav;
+    }
 }

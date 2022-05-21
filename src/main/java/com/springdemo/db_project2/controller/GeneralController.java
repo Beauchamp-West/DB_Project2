@@ -42,6 +42,25 @@ public class GeneralController {
      *
      * @return 导入信息
      */
+    @GetMapping("importOrigin")
+    public ModelAndView importOrigin() {
+        StringJoiner sj = new StringJoiner("");
+        sj.add(supplyCenterService.importCenters());
+        sj.add(enterpriseService.importEnterprises());
+        sj.add(modelService.importModels());
+        sj.add(staffService.importStaffs());
+
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("import_info",sj.toString());
+        mav.setViewName("import_all");
+        return mav;
+    }
+
+    /**
+     * 一键导入所有数据
+     *
+     * @return 导入信息
+     */
     @GetMapping("import")
     public ModelAndView importAll() {
         StringJoiner sj = new StringJoiner("");
@@ -50,6 +69,28 @@ public class GeneralController {
         sj.add(modelService.importModels());
         sj.add(staffService.importStaffs());
         sj.add(generalService.stockInAll());
+        sj.add(generalService.placeAll());
+        sj.add(generalService.updateAll());
+        sj.add(generalService.deleteAll());
+
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("import_info",sj.toString());
+        mav.setViewName("import_all");
+        return mav;
+    }
+
+    /**
+     * 一键导入所有测试数据
+     *
+     * @return 导入信息
+     */
+    @GetMapping("importTest")
+    public ModelAndView importTest() {
+        StringJoiner sj = new StringJoiner("");
+        sj.add(generalService.stockInAll());
+        sj.add(generalService.placeAll());
+        sj.add(generalService.updateAll());
+        sj.add(generalService.deleteAll());
 
         ModelAndView mav = new ModelAndView();
         mav.addObject("import_info",sj.toString());
@@ -58,11 +99,34 @@ public class GeneralController {
     }
 
     @GetMapping("stockIn")
-    public String stockin(@RequestParam(name = "center") String center, @RequestParam(name = "model") String model,
-                                @RequestParam(name = "staff") Integer staffNumber, @RequestParam(name = "date") String date,
-                                @RequestParam(name = "price") Integer price, @RequestParam(name = "q") Integer quantity)
-            throws ParseException {
+    public String stockIn(@RequestParam(name = "center") String center, @RequestParam(name = "model") String model,
+                          @RequestParam(name = "staff") Integer staffNumber, @RequestParam(name = "date") String date,
+                          @RequestParam(name = "price") Integer price, @RequestParam(name = "q") Integer quantity) {
         return generalService.stockIn(center, model, staffNumber, date, price, quantity);
     }
 
+    @GetMapping("placeOrder")
+    public String placeOrder(@RequestParam("c_num") String contract_num, @RequestParam("enterprise") String enterprise,
+                             @RequestParam("model") String product_model, @RequestParam("quantity") Integer sold,
+                             @RequestParam("manager") Integer contract_manager, @RequestParam("c_date") String contract_date,
+                             @RequestParam("e_date") String estimated_delivery_date, @RequestParam("l_date") String lodgement_date,
+                             @RequestParam("s_num") Integer salesman_num, @RequestParam("type") String contract_type) {
+        return generalService.placeOrder(contract_num,enterprise,product_model,sold, contract_manager,
+                contract_date,estimated_delivery_date, lodgement_date,salesman_num,
+                contract_type);
+    }
+
+    @GetMapping("updateOrder")
+    public String updateOrder(@RequestParam("c_num") String contract_num, @RequestParam("model") String product_model,
+                              @RequestParam("s_num") Integer salesman_num, @RequestParam("quantity") Integer quantity,
+                              @RequestParam("e_date") String estimated_delivery_date, @RequestParam("l_date") String lodgement_date) {
+        return generalService.updateOrder(contract_num, product_model, salesman_num, quantity,
+                estimated_delivery_date, lodgement_date);
+    }
+
+    @GetMapping("deleteOrder")
+    public String deleteOrder(@RequestParam("c_num") String contract_num, @RequestParam("s_num") Integer salesman_num,
+                              @RequestParam("seq") Integer seq) {
+        return generalService.deleteOrder(contract_num, salesman_num, seq);
+    }
 }

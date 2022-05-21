@@ -35,14 +35,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     }
 
     @Override
-    public String selectAll() {
-        List<Enterprise> enterprises = this.enterpriseDao.selectAll();
-        StringBuilder sb = new StringBuilder();
-        for (Enterprise enterprise: enterprises) {
-            sb.append(enterprise.toString()).append("\n");
-        }
-        return sb.toString();
-    }
+    public List<Enterprise> selectAll() { return this.enterpriseDao.selectAll(); }
 
     /**
      * 新增数据

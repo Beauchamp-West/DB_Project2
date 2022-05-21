@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>PrintImportInfo</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td>id</td>
+        <td>name</td>
+        <td>age</td>
+        <td>gender</td>
+        <td>number</td>
+        <td>supply_center</td>
+        <td>mobile_number</td>
+        <td>type</td>
+    </tr>
+    <tr th:each="s : ${staffs}">
+        <td th:text="${s.id}"></td>
+        <td th:text="${s.name}"></td>
+        <td th:text="${s.age}"></td>
+        <td th:text="${s.gender}"></td>
+        <td th:text="${s.number}"></td>
+        <td th:text="${s.supplyCenter}"></td>
+        <td th:text="${s.mobileNumber}"></td>
+        <td th:text="${s.type}"></td>
+    </tr>
+</table>
+</body>
+</html>

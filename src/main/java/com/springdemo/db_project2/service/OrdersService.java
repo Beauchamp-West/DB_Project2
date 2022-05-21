@@ -27,6 +27,13 @@ public interface OrdersService {
     List<Orders> queryAll();
 
     /**
+     * total number of orders
+     *
+     * @return count
+     */
+    Long getOrderCount();
+
+    /**
      * 新增数据
      *
      * @param orders 实例对象

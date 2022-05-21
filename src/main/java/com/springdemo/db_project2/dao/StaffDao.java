@@ -1,12 +1,11 @@
 package com.springdemo.db_project2.dao;
 
-import com.springdemo.db_project2.entity.Model;
 import com.springdemo.db_project2.entity.Staff;
-import com.springdemo.db_project2.provider.ModelProvider;
 import com.springdemo.db_project2.provider.StaffProvider;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Staff)表数据库访问层
@@ -45,12 +44,20 @@ public interface StaffDao {
 
 
     /**
-     * 通过实体作为筛选条件查询
+     * select all staffs
      *
-     * @param staff 实例对象
      * @return 对象列表
      */
-    List<Staff> queryAll(Staff staff);
+    @Select("select * from staff")
+    List<Staff> queryAll();
+
+    /**
+     * select count of staffs group by type
+     *
+     * @return (type,count) list
+     */
+    @Select("select count(*) as cnt, type from staff group by type")
+    List<Map<String,Object>> selectCntByType();
 
     /**
      * 新增数据

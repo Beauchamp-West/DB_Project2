@@ -1,16 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <style>
+        .wrap{
+            width:450px;
+            padding-top: 10px;
+        }
+        .item{
+            height: 40px;
+        }
+        .button-wrap{
+            width: 50px;
+            text-align: right;
+        }
+        .bottom{
+            padding-top: 10px;
+        }
+        label{
+            width: 50px;
+            display: inline-block;
+            text-align: right;
+        }
+    </style>
+    <title>Update Center</title>
+</head>
 <body>
 
 <p>Please enter supply center id and name</p>
-
-<form action="/center/updateName/" method="get">
-    <label for="inputId">Id:</label>
-    <input type="text" id="inputId" name="id"><br><br>
-    <label for="inputName">Name:</label>
-    <input type="text" id="inputName" name="name"><br><br>
-    <button type="submit">Submit</button>
-</form>
+<div class="wrap">
+    <form action="/center/updateName/" method="get">
+        <div class="item">
+            <label for="inputId"> Id:</label>
+            <input type="text" id="inputId" name="id"><br><br>
+        </div>
+        <div class="item">
+            <label for="inputName">Name:</label>
+            <input type="text" id="inputName" name="name"><br><br>
+        </div>
+        <div class="bottom">
+            <div class="button-wrap">
+                <input type="submit" value="Submit"/>
+            </div>
+        </div>
+    </form>
+</div>
 
 </body>
 </html>

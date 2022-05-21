@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Per Center</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td>index</td>
+        <td>supply_center</td>
+        <td>product_model</td>
+        <td>quantity</td>
+    </tr>
+    <tr th:each="p,pStat : ${products}">
+        <td th:text="${pStat.count}"></td>
+        <td th:text="${p['supply_center']}"></td>
+        <td th:text="${p['product_model']}"></td>
+        <td th:text="${p['quantity']}"></td>
+    </tr>
+</table>
+</body>
+</html>

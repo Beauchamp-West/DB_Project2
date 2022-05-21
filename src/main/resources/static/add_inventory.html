@@ -1,24 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <style>
+        .wrap{
+            width:450px;
+            padding-top: 10px;
+        }
+        .item{
+            height: 40px;
+        }
+        .button-wrap{
+            width: 180px;
+            text-align: right;
+        }
+        .bottom{
+            padding-top: 10px;
+        }
+        label{
+            width: 150px;
+            display: inline-block;
+            text-align: right;
+        }
+    </style>
+    <title>StockIn</title>
+</head>
 <body>
 
-<p>Please enter an inventory</p>
-
-<form action="/all/stockIn/" method="post">
-    <label for="inputId">Supply Center:</label>
-    <input type="text" id="inputId" name="center"><br><br>
-    <label for="inputModel">Product Model:</label>
-    <input type="text" id="inputModel" name="model"><br><br>
-    <label for="inputStaff">Supply Staff Number:</label>
-    <input type="text" id="inputStaff" name="staff"><br><br>
-    <label for="inputDate">Date:</label>
-    <input type="text" id="inputDate" name="date"><br><br>
-    <label for="inputPrice">Purchase Price:</label>
-    <input type="text" id="inputPrice" name="price"><br><br>
-    <label for="inputQuantity">Quantity:</label>
-    <input type="text" id="inputQuantity" name="q"><br><br>
-    <button type="submit">Submit</button>
-</form>
+<p>Please fill up the following form to add a stock</p>
+<div class="wrap">
+    <form action="/all/stockIn/" method="get">
+        <div class="item">
+            <label>Supply Center</label>
+            <label>
+                <input type="text" name="center"/>
+            </label>
+        </div>
+        <div class="item">
+            <label for="inputModel">Product Model:</label>
+            <input type="text" id="inputModel" name="model">
+        </div>
+        <div class="item">
+            <label for="inputStaff">Supply Staff Number:</label>
+            <input type="text" id="inputStaff" name="staff">
+        </div>
+        <div class="item">
+            <label for="inputDate">Date:</label>
+            <input type="text" id="inputDate" name="date">
+        </div>
+        <div class="item">
+            <label for="inputPrice">Purchase Price:</label>
+            <input type="text" id="inputPrice" name="price">
+        </div>
+        <div class = "item">
+            <label for="inputQuantity">Quantity:</label>
+            <input type="text" id="inputQuantity" name="q">
+        </div>
+        <div class="bottom">
+            <div class="button-wrap">
+                <input type="submit" value="Submit"/>
+            </div>
+        </div>
+    </form>
+</div>
 
 </body>
 </html>

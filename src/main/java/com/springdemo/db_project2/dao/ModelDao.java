@@ -34,12 +34,12 @@ public interface ModelDao {
 
 
     /**
-     * 通过实体作为筛选条件查询
+     * all models
      *
-     * @param model 实例对象
      * @return 对象列表
      */
-    List<Model> selectAll(Model model);
+    @Select("select * from model")
+    List<Model> selectAll();
 
     /**
      * 新增数据

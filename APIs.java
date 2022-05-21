@@ -5,18 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Objects;
 
 public class APIs {
-    /*
-    四个基本表的增删查改
-    一次性导入所有数据的功能
-    一次性输出所有数据的功能，格式按照section 4
-    stockin内容，向inventory内导入数据
 
-    */
-    /*
-    String operation = "";
-        PreparedStatement prep = con.prepareStatement(operation);
-        prep.execute();
-    */
     static Connection con = null;
     static Statement statement = null;
 
@@ -25,19 +14,17 @@ public class APIs {
         statement = con.createStatement();
     }
 
-    public static void selectAll(String table) throws SQLException {
+    public static ResultSet selectAll(String table) throws SQLException {
         String operation = "select * from " + table + ";";
-        PreparedStatement prep = con.prepareStatement(operation);
-        prep.execute();
+        return statement.executeQuery(operation);
     }
 
     public static void insertSupply_center(String inputData) throws SQLException {
         inputData = preprocess(inputData);
         String[] data = inputData.split(",");
-        data[1] = revert(data[0]);
+        data[1] = revert(data[1]);
         String operation = "insert into supply_center (name) values ('" + data[1] + "');";
-        PreparedStatement prep = con.prepareStatement(operation);
-        prep.execute();
+        statement.execute(operation);
     }
 
     public static void selectSupply_center(String name) throws SQLException {
@@ -106,10 +93,12 @@ public class APIs {
         String operation1 = "insert into orders (contract_num, enterprise, product_model, quantity," +
                 " contract_manager, contract_date, estimated_delivery_date, lodgement_date," +
                 " salesman_num, contract_type) values (?,?,?,?,?,?,?,?,?,?)";
-        String operation2 = "insert into orders (contract_num, enterprise," +
+        String operation2 = "insert into contract (contract_num, enterprise," +
                 " contract_manager, contract_date, estimated_delivery_date, lodgement_date," +
                 " contract_type) values (?,?,?,?,?,?,?)";
-        String check1 = "select quantity, sales from inventory where product_model = '" + data[2] + "';";
+        String check1 = "select quantity, sales from inventory where " +
+                "(select supply_center from enterprise where name = '"+data[1] +"') = supply_center " +
+                "and product_model = '" + data[2] + "' and ;";
         String check2 = "select type from staff where number = " + data[8] + ";";
         Statement statement = con.createStatement();
         ResultSet resultSet = statement.executeQuery(check1);
@@ -240,16 +229,18 @@ public class APIs {
     }
 
     public static void getNeverSoldProductCount() throws SQLException {
-        String operation = "select count(*) as cnt from inventory join orders on inventory.product_model = orders.product_model " +
-                "where inventory.quantity > 0 and inventory.sales = 0;";
+        String operation = "select count(*) as cnt from (select count(*), product_model from inventory " +
+                "where inventory.quantity > 0 and inventory.sales = 0 group by product_model) as t;";
         ResultSet resultSet = statement.executeQuery(operation);
         int res = resultSet.getInt("cnt");
         System.out.println("never-sold products: "+res);
     }
 
     public static void getFavoriteProductModel() throws SQLException {
-        String operation = "select product_model, maximum from(select max(sales) as maximum from inventory) as t " +
-                "join inventory on inventory.sales = t.maximum;";
+        String operation = "select maximum , product_model from (select max(sum) as maximum from" +
+                "(select sum(sales) as sum, product_model from inventory group by product_model)as t1) as t2 " +
+                "join (select sum(sales) as sum, product_model from inventory group by product_model)as t1 " +
+                "on t1.sum = t2.maximum;";
         ResultSet resultSet = statement.executeQuery(operation);
         System.out.println(resultSet.getString("product_model") + "   " + resultSet.getInt("maximum"));
     }

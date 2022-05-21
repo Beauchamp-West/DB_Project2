@@ -1,7 +1,10 @@
 package com.springdemo.db_project2.service;
 
 import com.springdemo.db_project2.entity.Staff;
+import org.apache.ibatis.annotations.Select;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Staff)表服务接口
@@ -35,6 +38,20 @@ public interface StaffService {
      * @return 对象列表
      */
     List<Staff> queryAllByLimit(int offset, int limit);
+
+    /**
+     * 查询所有数据
+     *
+     * @return 对象列表
+     */
+    List<Staff> selectAll();
+
+    /**
+     * select count of staffs group by type
+     *
+     * @return (type,count) list
+     */
+    List<Map<String,Object>> getAllStaffCount();
 
     /**
      * 新增数据

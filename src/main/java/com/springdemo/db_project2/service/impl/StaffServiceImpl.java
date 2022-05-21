@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Staff)表服务实现类
@@ -49,6 +50,16 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public List<Staff> queryAllByLimit(int offset, int limit) {
         return this.staffDao.queryAllByLimit(offset, limit);
+    }
+
+    @Override
+    public List<Staff> selectAll() {
+        return staffDao.queryAll();
+    }
+
+    @Override
+    public List<Map<String, Object>> getAllStaffCount() {
+        return staffDao.selectCntByType();
     }
 
     /**

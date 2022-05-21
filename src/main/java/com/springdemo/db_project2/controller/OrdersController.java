@@ -43,4 +43,10 @@ public class OrdersController {
         mav.setViewName("select_order");
         return mav;
     }
+
+    @GetMapping("selectCnt")
+    public String selectCnt() {
+        Long cnt = ordersService.getOrderCount();
+        return "total number of contracts: " + cnt;
+    }
 }

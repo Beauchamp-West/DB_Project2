@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Orders)表服务实现类
@@ -38,6 +39,12 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public List<Orders> queryAll() {
         return this.ordersDao.queryAll();
+    }
+
+    @Override
+    public Long getOrderCount() {
+        Map<String,Object> map = ordersDao.selectCnt();
+        return (Long) map.get("cnt");
     }
 
     /**

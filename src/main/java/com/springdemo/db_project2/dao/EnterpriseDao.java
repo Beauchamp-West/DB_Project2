@@ -34,6 +34,6 @@ public interface EnterpriseDao {
 
     @InsertProvider(type = EnterpriseProvider.class, method = "importEnterprises")
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    int batchInsert(@Param("list") List<Enterprise> enterprises);
+    void batchInsert(@Param("list") List<Enterprise> enterprises);
 
 }

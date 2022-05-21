@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .wrap{
+            width:450px;
+            padding-top: 10px;
+        }
+        .item{
+            height: 40px;
+        }
+        .button-wrap{
+            width: 180px;
+            text-align: right;
+        }
+        .bottom{
+            padding-top: 10px;
+        }
+        label{
+            width: 150px;
+            display: inline-block;
+            text-align: right;
+        }
+    </style>
+    <title>Delete Order</title>
+</head>
+<body>
+
+<p>Please fill up the following form about the order you want to delete</p>
+<div class="wrap">
+<form action="/all/deleteOrder/" method="get">
+    <div class="item">
+    <label for="inputContract">Contract Number:</label>
+    <input type="text" id="inputContract" name="c_num"><br><br>
+    </div>
+    <div class="item">
+    <label for="inputS">Salesman Number:</label>
+    <input type="text" id="inputS" name="s_num"><br><br>
+    </div>
+    <div class="item">
+    <label for="inputSeq">Sequence:</label>
+    <input type="text" id="inputSeq" name="seq"><br><br>
+    </div>
+
+    <div class="bottom">
+        <div class="button-wrap">
+            <input type="submit" value="Submit"/>
+        </div>
+    </div>
+</form>
+</div>
+
+</body>
+</html>

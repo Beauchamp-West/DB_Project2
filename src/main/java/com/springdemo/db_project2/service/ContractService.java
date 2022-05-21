@@ -27,12 +27,18 @@ public interface ContractService {
     List<Contract> queryAll();
 
     /**
+     * total number of contracts
+     *
+     * @return count
+     */
+    Long getContractCount();
+
+    /**
      * 新增数据
      *
      * @param contract 实例对象
-     * @return 实例对象
      */
-    Contract insert(Contract contract);
+    void insert(Contract contract);
 
     /**
      * 修改数据

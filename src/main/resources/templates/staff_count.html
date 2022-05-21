@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff Count</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td>index</td>
+        <td>type</td>
+        <td>count</td>
+    </tr>
+    <tr th:each="c,cStat : ${cnt}">
+        <td th:text="${cStat.count}"></td>
+        <td th:text="${c['type']}"></td>
+        <td th:text="${c['cnt']}"></td>
+    </tr>
+</table>
+</body>
+</html>

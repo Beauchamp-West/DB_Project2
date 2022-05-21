@@ -24,7 +24,7 @@ public interface EnterpriseService {
      *
      * @return 对象列表
      */
-    String selectAll();
+    List<Enterprise> selectAll();
 
     /**
      * 新增数据

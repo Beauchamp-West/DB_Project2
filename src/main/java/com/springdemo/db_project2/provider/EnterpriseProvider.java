@@ -10,8 +10,8 @@ import java.util.Map;
  * Enterprise(复杂数据库操作方法提供层)
  */
 public class EnterpriseProvider {
-    public String importEnterprises(Map map) {
-        List<Enterprise> enterpriseList = (List<Enterprise>) map.get("list");
+    public String importEnterprises(Map<String,List<Enterprise>> map) {
+        List<Enterprise> enterpriseList = map.get("list");
         StringBuilder sb = new StringBuilder();
         sb.append("insert into enterprise ");
         sb.append("(name,country,city,supply_center,industry) values ");

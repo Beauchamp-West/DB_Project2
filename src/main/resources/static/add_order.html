@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .wrap{
+            width:450px;
+            padding-top: 10px;
+        }
+        .item{
+            height: 40px;
+        }
+        .button-wrap{
+            width: 180px;
+            text-align: right;
+        }
+        .bottom{
+            padding-top: 10px;
+        }
+        label{
+            width: 180px;
+            display: inline-block;
+            text-align: right;
+        }
+    </style>
+    <title>Place Order</title>
+</head>
+<body>
+
+<p>Please fill up the following form to place an order</p>
+
+<div class="wrap">
+    <form action="/all/placeOrder/" method="get">
+        <div class="item">
+            <label for="inputContract">Contract Number:</label>
+            <input type="text" id="inputContract" name="c_num">
+        </div>
+        <div class="item">
+            <label for="inputE">Enterprise:</label>
+            <input type="text" id="inputE" name="enterprise">
+        </div>
+        <div class="item">
+            <label for="inputModel">Product Model:</label>
+            <input type="text" id="inputModel" name="model">
+        </div>
+        <div class="item">
+            <label for="inputQuantity">Quantity:</label>
+            <input type="text" id="inputQuantity" name="q">
+        </div>
+        <div class="item">
+            <label for="inputM">Manager Number:</label>
+            <input type="text" id="inputM" name="manager">
+        </div>
+        <div class="item">
+            <label for="inputDate">Contract Date:</label>
+            <input type="text" id="inputDate" name="c_date">
+        </div>
+        <div class="item">
+            <label for="inputEDate">Estimated Delivery Date:</label>
+            <input type="text" id="inputEDate" name="e_date">
+        </div>
+        <div class="item">
+            <label for="inputLDate">Lodgement Date:</label>
+            <input type="text" id="inputLDate" name="l_date">
+        </div>
+        <div class="item">
+            <label for="inputS">Salesman Number:</label>
+            <input type="text" id="inputS" name="s_num">
+        </div>
+        <div class="item">
+            <label for="inputT">Contract Type:</label>
+            <input type="text" id="inputT" name="type">
+        </div>
+
+        <div class="bottom">
+            <div class="button-wrap">
+                <input type="submit" value="Submit"/>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

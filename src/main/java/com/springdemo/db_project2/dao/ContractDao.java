@@ -1,11 +1,10 @@
 package com.springdemo.db_project2.dao;
 
 import com.springdemo.db_project2.entity.Contract;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Contract)表数据库访问层
@@ -42,13 +41,37 @@ public interface ContractDao {
     @Select("select * from contract")
     List<Contract> queryAll();
 
+
+    /**
+     * select contract by contract number
+     *
+     * @param num contract number
+     * @return contracts list
+     */
+    @Select("select * from contract where contract_num = #{num}")
+    List<Contract> selectByNum(String num);
+
+    /**
+     * select count of all contracts
+     *
+     * @return count
+     */
+    @Select("select count(*) as cnt from contract")
+    Map<String,Object> selectCnt();
+
     /**
      * 新增数据
      *
      * @param contract 实例对象
      * @return 影响行数
      */
-    int insert(Contract contract);
+    @Insert("insert into contract (contract_num, enterprise, " +
+            "contract_manager, contract_date, estimated_delivery_date, lodgement_date, " +
+            "contract_type) values (#{c.contractNum},#{c.enterprise}," +
+            "#{c.contractManager},#{c.contractDate},#{c.estimatedDeliveryDate}," +
+            "#{c.lodgementDate},#{c.contractType})")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insert(@Param("c") Contract contract);
 
     /**
      * 修改数据

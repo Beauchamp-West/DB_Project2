@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Contract)表服务实现类
@@ -40,16 +41,20 @@ public class ContractServiceImpl implements ContractService {
         return this.contractDao.queryAll();
     }
 
+    @Override
+    public Long getContractCount() {
+        Map<String,Object> map = contractDao.selectCnt();
+        return (Long) map.get("cnt");
+    }
+
     /**
      * 新增数据
      *
      * @param contract 实例对象
-     * @return 实例对象
      */
     @Override
-    public Contract insert(Contract contract) {
+    public void insert(Contract contract) {
         this.contractDao.insert(contract);
-        return contract;
     }
 
     /**

@@ -1,14 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <style>
+        .wrap{
+            width:450px;
+            padding-top: 10px;
+        }
+        .item{
+            height: 40px;
+        }
+        .button-wrap{
+            width: 50px;
+            text-align: right;
+        }
+        .bottom{
+            padding-top: 10px;
+        }
+        label{
+            width: 50px;
+            display: inline-block;
+            text-align: right;
+        }
+    </style>
+    <title>Add Center</title>
+</head>
 <body>
 
 <p>Please enter a supply center name</p>
-
-<form action="/center/addByName/" method="post">
-    <label for="inputId">Name:</label>
-    <input type="text" id="inputId" name="name"><br><br>
-    <button type="submit">Submit</button>
-</form>
+<div class="wrap">
+    <form action="/center/addByName/" method="post">
+        <div class="item">
+        <label for="inputId">Name:</label>
+        <input type="text" id="inputId" name="name"><br><br>
+        </div>
+        <div class="bottom">
+            <div class="button-wrap">
+                <input type="submit" value="Submit"/>
+            </div>
+        </div>
+    </form>
+</div>
 
 </body>
 </html>
