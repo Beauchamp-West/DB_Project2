@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 
 /**
  * (Staff)表服务实现类
@@ -60,6 +61,19 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public List<Map<String, Object>> getAllStaffCount() {
         return staffDao.selectCntByType();
+    }
+
+    @Override
+    public String getCountFormat() {
+        StringJoiner sj = new StringJoiner("\n");
+        sj.add("Q6");
+        List<Map<String, Object>> staff = staffDao.selectCntByType();
+        for (Map<String, Object> map : staff) {
+            String type = (String) map.get("type");
+            Long cnt = (Long) map.get("cnt");
+            sj.add(String.format("%-30s%-10d", type, cnt));
+        }
+        return sj.toString();
     }
 
     /**

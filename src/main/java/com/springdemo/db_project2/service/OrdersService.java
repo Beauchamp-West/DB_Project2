@@ -34,6 +34,13 @@ public interface OrdersService {
     Long getOrderCount();
 
     /**
+     * format the count of orders
+     *
+     * @return formatted count
+     */
+    String getCountFormat();
+
+    /**
      * 新增数据
      *
      * @param orders 实例对象

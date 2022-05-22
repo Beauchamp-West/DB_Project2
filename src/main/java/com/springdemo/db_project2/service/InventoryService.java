@@ -35,6 +35,13 @@ public interface InventoryService {
      */
     Long getNeverSoldProductCount();
 
+    /**
+     * format the count of never sold models
+     *
+     * @return formatted count
+     */
+    String getNeverSoldCountFormat();
+
 
     /**
      * Find the models with the highest sold quantity, and the number of sales
@@ -42,6 +49,13 @@ public interface InventoryService {
      * @return model_name, quantity
      */
     List<Map<String,Object>> getFavoriteProductModel();
+
+    /**
+     * format the favorite product model
+     *
+     * @return formatted string
+     */
+    String getFavoriteFormat();
 
 
     /**
@@ -51,6 +65,13 @@ public interface InventoryService {
      * @return supply_center, average
      */
     List<Map<String,Object>> getAvgStockByCenter();
+
+    /**
+     * format the average number of stocks by center
+     *
+     * @return formatted string
+     */
+    String getAvgFormat();
 
     /**
      * Find a product according to the product number and return the current inventory capacity of each

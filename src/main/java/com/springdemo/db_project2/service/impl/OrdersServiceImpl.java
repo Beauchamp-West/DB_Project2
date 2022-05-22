@@ -47,6 +47,11 @@ public class OrdersServiceImpl implements OrdersService {
         return (Long) map.get("cnt");
     }
 
+    @Override
+    public String getCountFormat() {
+        return "Q8 " + getOrderCount();
+    }
+
     /**
      * 新增数据
      *

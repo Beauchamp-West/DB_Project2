@@ -34,6 +34,22 @@ public interface ContractService {
     Long getContractCount();
 
     /**
+     * format the count of contract
+     *
+     * @return formatted count
+     */
+    String getCountFormat();
+
+
+    /**
+     * Find a contract with a contract number and return the content of the contract
+     *
+     * @param contractNum contract_number
+     * @return contract content as String
+     */
+    String getContractInfo(String contractNum);
+
+    /**
      * 新增数据
      *
      * @param contract 实例对象

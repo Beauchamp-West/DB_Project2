@@ -48,4 +48,12 @@ public class ContractController {
         Long cnt = contractService.getContractCount();
         return "total number of contracts: " + cnt;
     }
+
+    @GetMapping("contractInfo")
+    public ModelAndView contractInfo(@RequestParam("num") String contractNum) {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("import_info",contractService.getContractInfo(contractNum));
+        mav.setViewName("import_all");
+        return mav;
+    }
 }

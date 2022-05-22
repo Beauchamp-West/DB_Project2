@@ -54,6 +54,13 @@ public interface StaffService {
     List<Map<String,Object>> getAllStaffCount();
 
     /**
+     * format the result of getAllStaffCount
+     *
+     * @return formatted String
+     */
+    String getCountFormat();
+
+    /**
      * 新增数据
      *
      * @param staff 实例对象

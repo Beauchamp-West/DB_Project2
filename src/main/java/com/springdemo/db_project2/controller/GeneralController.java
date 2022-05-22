@@ -44,7 +44,7 @@ public class GeneralController {
      */
     @GetMapping("importOrigin")
     public ModelAndView importOrigin() {
-        StringJoiner sj = new StringJoiner("");
+        StringJoiner sj = new StringJoiner("\n");
         sj.add(supplyCenterService.importCenters());
         sj.add(enterpriseService.importEnterprises());
         sj.add(modelService.importModels());
@@ -63,7 +63,7 @@ public class GeneralController {
      */
     @GetMapping("import")
     public ModelAndView importAll() {
-        StringJoiner sj = new StringJoiner("");
+        StringJoiner sj = new StringJoiner("\n");
         sj.add(supplyCenterService.importCenters());
         sj.add(enterpriseService.importEnterprises());
         sj.add(modelService.importModels());
@@ -86,7 +86,7 @@ public class GeneralController {
      */
     @GetMapping("importTest")
     public ModelAndView importTest() {
-        StringJoiner sj = new StringJoiner("");
+        StringJoiner sj = new StringJoiner("\n");
         sj.add(generalService.stockInAll());
         sj.add(generalService.placeAll());
         sj.add(generalService.updateAll());
@@ -128,5 +128,21 @@ public class GeneralController {
     public String deleteOrder(@RequestParam("c_num") String contract_num, @RequestParam("s_num") Integer salesman_num,
                               @RequestParam("seq") Integer seq) {
         return generalService.deleteOrder(contract_num, salesman_num, seq);
+    }
+
+    @GetMapping("output")
+    public ModelAndView output() {
+        StringJoiner sj = new StringJoiner("\n");
+        sj.add(staffService.getCountFormat());
+        sj.add(contractService.getCountFormat());
+        sj.add(ordersService.getCountFormat());
+        sj.add(inventoryService.getNeverSoldCountFormat());
+        sj.add(inventoryService.getFavoriteFormat());
+        sj.add(inventoryService.getAvgFormat());
+
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("import_info",sj.toString());
+        mav.setViewName("import_all");
+        return mav;
     }
 }

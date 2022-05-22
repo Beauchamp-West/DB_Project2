@@ -1,6 +1,7 @@
 package com.springdemo.db_project2.dao;
 
 import com.springdemo.db_project2.entity.Contract;
+import com.springdemo.db_project2.provider.ContractProvider;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -58,6 +59,16 @@ public interface ContractDao {
      */
     @Select("select count(*) as cnt from contract")
     Map<String,Object> selectCnt();
+
+
+    /**
+     * select a contract with a contract number
+     *
+     * @param contract_num contract_number
+     * @return contract information map
+     */
+    @SelectProvider(type = ContractProvider.class, method = "getContractInfo")
+    List<Map<String, Object>> selectContractInfo(@Param("num") String contract_num);
 
     /**
      * 新增数据

@@ -63,7 +63,7 @@ public interface InventoryDao {
      * @return 对象列表
      */
     @Select("select * from inventory " +
-            "where (select supply_center from enterprise where name = #{name}) = supply_center " +
+            "where (select distinct supply_center from enterprise where name = #{name}) = supply_center " +
             "                and product_model = #{model}")
     List<Inventory> selectByEnterpriseAndModel(@Param("name") String name, @Param("model") String model);
 
@@ -114,7 +114,7 @@ public interface InventoryDao {
      */
     @Update("update inventory set quantity = (#{quantity} - #{sold}), sales = (#{sales} + #{sold})" +
             "where product_model = #{model} " +
-            "and supply_center = (select supply_center from enterprise where name = #{enterprise})")
+            "and supply_center = (select distinct supply_center from enterprise where name = #{enterprise})")
     void updateBySold(@Param("sold") Integer sold, @Param("quantity") Integer quantity, @Param("sales") Integer sales,
     @Param("model") String model, @Param("enterprise") String enterprise);
 

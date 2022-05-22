@@ -6,8 +6,10 @@ import com.springdemo.db_project2.service.InventoryService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 
 /**
  * (Inventory)表服务实现类
@@ -47,13 +49,44 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
+    public String getNeverSoldCountFormat() {
+        return "Q9 " + getNeverSoldProductCount();
+    }
+
+    @Override
     public List<Map<String, Object>> getFavoriteProductModel() {
         return inventoryDao.selectFavorite();
     }
 
     @Override
+    public String getFavoriteFormat() {
+        StringJoiner sj = new StringJoiner("\n");
+        sj.add("Q10");
+        List<Map<String, Object>> favorites = getFavoriteProductModel();
+        for (Map<String, Object> map : favorites) {
+            String model = (String) map.get("product_model");
+            Long quantity = (Long) map.get("maximum");
+            sj.add(String.format("%-35s%-10d", model, quantity));
+        }
+        return sj.toString();
+    }
+
+    @Override
     public List<Map<String, Object>> getAvgStockByCenter() {
         return inventoryDao.selectAvgStockByCenter();
+    }
+
+    @Override
+    public String getAvgFormat() {
+        StringJoiner sj = new StringJoiner("\n");
+        sj.add("Q11");
+        List<Map<String, Object>> averages = getAvgStockByCenter();
+        for (Map<String, Object> map : averages) {
+            String center = (String) map.get("supply_center");
+            BigDecimal average = (BigDecimal) map.get("average");
+            sj.add(String.format("%-50s%-10s", center, average.toString()));
+        }
+        return sj.toString();
     }
 
     @Override
