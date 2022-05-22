@@ -1,8 +1,10 @@
 package com.springdemo.db_project2.dao;
 
 import com.springdemo.db_project2.entity.Orders;
+import com.springdemo.db_project2.provider.OrdersProvider;
 import org.apache.ibatis.annotations.*;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -65,6 +67,13 @@ public interface OrdersDao {
     @Select("select count(*) as cnt from orders")
     Map<String,Object> selectCnt();
 
+    @SelectProvider(type = OrdersProvider.class, method = "selectByArgs")
+    List<Orders> selectByMultiArgs(@Param("c_num") String contractNum, @Param("enterprise") String enterprise,
+                                   @Param("model") String model, @Param("manager") String manager,
+                                   @Param("c_date") String contractDate, @Param("e_date") String estimatedDeliveryDate,
+                                   @Param("l_date") String lodgementDate, @Param("salesman") String salesman,
+                                   @Param("c_type") String contractType);
+
     /**
      * 新增数据
      *
@@ -102,6 +111,15 @@ public interface OrdersDao {
     void updateQuantityAndDates(@Param("q") Integer quantity, @Param("e_date")LocalDate estimated_delivery_date,
                                 @Param("l_date") LocalDate lodgement_date, @Param("c_num") String contractNum,
                                 @Param("model") String model, @Param("s_num") Integer salesmanNum);
+
+
+    @Update("update orders set contract_type = case " +
+            "when lodgement_date is not null and lodgement_date <= orders.estimated_delivery_date then 'Finished' " +
+            "when (lodgement_date is null and estimated_delivery_date < #{date}) " +
+            "or (lodgement_date is not null and lodgement_date > orders.estimated_delivery_date) then 'Overdue' " +
+            "when lodgement_date is null and estimated_delivery_date >= #{date} then 'Unfinished' end " +
+            "where contract_type != 'Finished' or contract_type != 'Overdue'")
+    void updateTypeByTime(@Param("date") Date date);
 
     /**
      * 通过主键删除数据

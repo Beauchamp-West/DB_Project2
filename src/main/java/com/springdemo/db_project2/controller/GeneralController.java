@@ -98,6 +98,22 @@ public class GeneralController {
         return mav;
     }
 
+    /**
+     * import test data for auto update
+     *
+     * @return 导入信息
+     */
+    @GetMapping("testUpdate")
+    public ModelAndView importUpdateTest() {
+        StringJoiner sj = new StringJoiner("\n");
+        sj.add(generalService.importUpdateTest());
+
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("import_info",sj.toString());
+        mav.setViewName("import_all");
+        return mav;
+    }
+
     @GetMapping("stockIn")
     public String stockIn(@RequestParam(name = "center") String center, @RequestParam(name = "model") String model,
                           @RequestParam(name = "staff") Integer staffNumber, @RequestParam(name = "date") String date,

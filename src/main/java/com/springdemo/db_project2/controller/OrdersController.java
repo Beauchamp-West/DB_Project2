@@ -3,6 +3,7 @@ package com.springdemo.db_project2.controller;
 import com.springdemo.db_project2.entity.Contract;
 import com.springdemo.db_project2.entity.Orders;
 import com.springdemo.db_project2.service.OrdersService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -48,5 +49,24 @@ public class OrdersController {
     public String selectCnt() {
         Long cnt = ordersService.getOrderCount();
         return "total number of contracts: " + cnt;
+    }
+
+    @GetMapping("selectByArgs")
+    public ModelAndView selectByArgs(@RequestParam("c_num") String contractNum, @RequestParam("enterprise") String enterprise,
+                                     @RequestParam("model") String model, @RequestParam("manager") String manager,
+                                     @RequestParam("c_date") String contractDate, @RequestParam("e_date") String estimatedDeliveryDate,
+                                     @RequestParam("l_date") String lodgementDate, @RequestParam("salesman") String salesman,
+                                     @RequestParam("c_type") String contractType) {
+        List<Orders> res = ordersService.selectByMultiArgs(contractNum, enterprise, model, manager,
+                contractDate, estimatedDeliveryDate, lodgementDate, salesman, contractType);
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("orders",res);
+        mav.setViewName("select_order");
+        return mav;
+    }
+
+    @GetMapping("updateType")
+    public String updateType() {
+        return ordersService.updateStatus();
     }
 }

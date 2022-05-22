@@ -3,11 +3,11 @@ package com.springdemo.db_project2.service.impl;
 import com.springdemo.db_project2.entity.Orders;
 import com.springdemo.db_project2.dao.OrdersDao;
 import com.springdemo.db_project2.service.OrdersService;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * (Orders)表服务实现类
@@ -39,6 +39,14 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public List<Orders> queryAll() {
         return this.ordersDao.queryAll();
+    }
+
+    @Override
+    public List<Orders> selectByMultiArgs(String contractNum, String enterprise, String model,
+                                          String manager, String contractDate, String estimatedDeliveryDate,
+                                          String lodgementDate, String salesman, String contractType) {
+        return ordersDao.selectByMultiArgs(contractNum, enterprise, model, manager,
+                contractDate, estimatedDeliveryDate, lodgementDate, salesman, contractType);
     }
 
     @Override
@@ -74,6 +82,21 @@ public class OrdersServiceImpl implements OrdersService {
     public Orders update(Orders orders) {
         this.ordersDao.update(orders);
         return this.queryById(orders.getId());
+    }
+
+    @Override
+    public String updateStatus() {
+        java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
+        ordersDao.updateTypeByTime(date);
+
+        return "All orders statuses updated!";
+    }
+
+    @Override
+    @Scheduled(cron = "15/10 * * * * ? " )
+    public void autoUpdate() {
+        java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
+        ordersDao.updateTypeByTime(date);
     }
 
     /**

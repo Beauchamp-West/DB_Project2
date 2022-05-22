@@ -27,6 +27,24 @@ public interface OrdersService {
     List<Orders> queryAll();
 
     /**
+     * select orders by multiple parameters where each of them can be null or not
+     *
+     * @param contractNum contract number
+     * @param enterprise enterprise name
+     * @param model model
+     * @param manager manager number
+     * @param contractDate contract date
+     * @param estimatedDeliveryDate estimated Delivery Date
+     * @param lodgementDate lodgement Date
+     * @param salesman salesman number
+     * @param contractType contract type
+     * @return list of orders
+     */
+    List<Orders> selectByMultiArgs(String contractNum, String enterprise, String model,
+                                   String manager, String contractDate, String estimatedDeliveryDate,
+                                   String lodgementDate, String salesman, String contractType);
+
+    /**
      * total number of orders
      *
      * @return count
@@ -55,6 +73,15 @@ public interface OrdersService {
      * @return 实例对象
      */
     Orders update(Orders orders);
+
+    /**
+     * update order's type by the real time
+     *
+     * @return update info
+     */
+    String updateStatus();
+
+    void autoUpdate();
 
     /**
      * 通过主键删除数据

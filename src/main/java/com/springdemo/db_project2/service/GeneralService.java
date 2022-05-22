@@ -365,4 +365,87 @@ public class GeneralService {
         return "Successfully deleted " + cnt + " orders!\n";
     }
 
+    /**
+     * Add a single order without validation check
+     *
+     * @param contract_num contract number
+     * @param enterprise enterprise name
+     * @param product_model product model
+     * @param sold once sales
+     * @param contract_manager manager number
+     * @param contract_date contract date
+     * @param estimated_delivery_date estimated delivery date
+     * @param lodgement_date lodgement date
+     * @param salesman_num salesman number
+     * @param contract_type contract type
+     * @return successfully added or not
+     */
+    public String rudePlaceOrder(String contract_num, String enterprise, String product_model, Integer sold,
+                             Integer contract_manager, String contract_date, String estimated_delivery_date,
+                             String lodgement_date, Integer salesman_num, String contract_type) {
+
+        // add new order
+        Orders orders = new Orders();
+        orders.setContractNum(contract_num);
+        orders.setEnterprise(enterprise);
+        orders.setProductModel(product_model);
+        orders.setQuantity(sold);
+        orders.setContractManager(contract_manager);
+        String [] dateSplit = contract_date.split("/");
+        LocalDate date1 = LocalDate.of(Integer.parseInt(dateSplit[2]),Integer.parseInt(dateSplit[0]),
+                Integer.parseInt(dateSplit[1]));
+        orders.setContractDate(date1);
+        dateSplit = estimated_delivery_date.split("/");
+        LocalDate date2 = LocalDate.of(Integer.parseInt(dateSplit[2]),Integer.parseInt(dateSplit[0]),
+                Integer.parseInt(dateSplit[1]));
+        orders.setEstimatedDeliveryDate(date2);
+        if (lodgement_date != null && !lodgement_date.equals("")) {
+            dateSplit = lodgement_date.split("/");
+            LocalDate date3 = LocalDate.of(Integer.parseInt(dateSplit[2]), Integer.parseInt(dateSplit[0]),
+                    Integer.parseInt(dateSplit[1]));
+            orders.setLodgementDate(date3);
+        }
+        orders.setSalesmanNum(salesman_num);
+        orders.setContractType(contract_type);
+        ordersDao.insert(orders);
+
+        return "Boldly added one order!";
+    }
+
+    /**
+     * import test data for auto update
+     *
+     * @return import information
+     */
+    public String importUpdateTest() {
+        int cnt = 0;
+        String fileName = "tables/test.csv";
+
+        try (BufferedReader infile = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            String[] data;
+            while ((line = infile.readLine()) != null) {
+                data = line.split(",",-1);
+                String contract_num = data[0];
+                String enterprise = data[1];
+                String product_model = data[2];
+                Integer sold = Integer.parseInt(data[3]);
+                Integer contract_manager = Integer.parseInt(data[4]);
+                String contract_date = data[5];
+                String estimated_delivery_date = data[6];
+                String lodgement_date = data[7];
+                Integer salesman_num = Integer.parseInt(data[8]);
+                String contract_type = data[9];
+                if (rudePlaceOrder(contract_num,enterprise,product_model,sold, contract_manager,
+                        contract_date,estimated_delivery_date, lodgement_date,salesman_num,
+                        contract_type).equals("Boldly added one order!"))
+                    cnt++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "Boldly placed " + cnt + " orders!\n";
+    }
+
 }
