@@ -93,7 +93,7 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    @Scheduled(cron = "15/10 * * * * ? " )
+    @Scheduled(cron = "20/20 * * * * ? " )
     public void autoUpdate() {
         java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
         ordersDao.updateTypeByTime(date);

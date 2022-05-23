@@ -160,18 +160,28 @@ public class GeneralService {
         orders.setProductModel(product_model);
         orders.setQuantity(sold);
         orders.setContractManager(contract_manager);
-        String [] dateSplit = contract_date.split("-");
-        LocalDate date1 = LocalDate.of(Integer.parseInt(dateSplit[0]),Integer.parseInt(dateSplit[1]),
-                Integer.parseInt(dateSplit[2]));
-        orders.setContractDate(date1);
-        dateSplit = estimated_delivery_date.split("-");
-        LocalDate date2 = LocalDate.of(Integer.parseInt(dateSplit[0]),Integer.parseInt(dateSplit[1]),
-                Integer.parseInt(dateSplit[2]));
-        orders.setEstimatedDeliveryDate(date2);
-        dateSplit = lodgement_date.split("-");
-        LocalDate date3 = LocalDate.of(Integer.parseInt(dateSplit[0]),Integer.parseInt(dateSplit[1]),
-                Integer.parseInt(dateSplit[2]));
-        orders.setLodgementDate(date3);
+        String[] dateSplit;
+        LocalDate date1 = null;
+        LocalDate date2 = null;
+        LocalDate date3 = null;
+        if (contract_date != null && !contract_date.equals("")) {
+            dateSplit = contract_date.split("-");
+            date1 = LocalDate.of(Integer.parseInt(dateSplit[0]), Integer.parseInt(dateSplit[1]),
+                    Integer.parseInt(dateSplit[2]));
+            orders.setContractDate(date1);
+        }
+        if (estimated_delivery_date != null && !estimated_delivery_date.equals("")) {
+            dateSplit = estimated_delivery_date.split("-");
+            date2 = LocalDate.of(Integer.parseInt(dateSplit[0]), Integer.parseInt(dateSplit[1]),
+                    Integer.parseInt(dateSplit[2]));
+            orders.setEstimatedDeliveryDate(date2);
+        }
+        if (lodgement_date != null && !lodgement_date.equals("")) {
+            dateSplit = lodgement_date.split("-");
+            date3 = LocalDate.of(Integer.parseInt(dateSplit[0]), Integer.parseInt(dateSplit[1]),
+                    Integer.parseInt(dateSplit[2]));
+            orders.setLodgementDate(date3);
+        }
         orders.setSalesmanNum(salesman_num);
         orders.setContractType(contract_type);
         ordersDao.insert(orders);
@@ -391,14 +401,19 @@ public class GeneralService {
         orders.setProductModel(product_model);
         orders.setQuantity(sold);
         orders.setContractManager(contract_manager);
-        String [] dateSplit = contract_date.split("/");
-        LocalDate date1 = LocalDate.of(Integer.parseInt(dateSplit[2]),Integer.parseInt(dateSplit[0]),
-                Integer.parseInt(dateSplit[1]));
-        orders.setContractDate(date1);
-        dateSplit = estimated_delivery_date.split("/");
-        LocalDate date2 = LocalDate.of(Integer.parseInt(dateSplit[2]),Integer.parseInt(dateSplit[0]),
-                Integer.parseInt(dateSplit[1]));
-        orders.setEstimatedDeliveryDate(date2);
+        String[] dateSplit;
+        if (contract_date != null && !contract_date.equals("")) {
+            dateSplit = contract_date.split("/");
+            LocalDate date1 = LocalDate.of(Integer.parseInt(dateSplit[2]), Integer.parseInt(dateSplit[0]),
+                    Integer.parseInt(dateSplit[1]));
+            orders.setContractDate(date1);
+        }
+        if (estimated_delivery_date != null && !estimated_delivery_date.equals("")) {
+            dateSplit = estimated_delivery_date.split("/");
+            LocalDate date2 = LocalDate.of(Integer.parseInt(dateSplit[2]), Integer.parseInt(dateSplit[0]),
+                    Integer.parseInt(dateSplit[1]));
+            orders.setEstimatedDeliveryDate(date2);
+        }
         if (lodgement_date != null && !lodgement_date.equals("")) {
             dateSplit = lodgement_date.split("/");
             LocalDate date3 = LocalDate.of(Integer.parseInt(dateSplit[2]), Integer.parseInt(dateSplit[0]),
